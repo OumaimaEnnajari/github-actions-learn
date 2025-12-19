@@ -11,11 +11,11 @@ jobs:
   echo-goodbye: 
     runs-on: windows-latest
     steps: 
-      - name : Failed step
+      - name : Successed step
         shell: bash     #run the follwing command via bash shell 
         run: |
           echo "I will fail"
-          exit 1
+          exit 0
       - name: Say goodbye
         run: echo "Goodbye!"
         
