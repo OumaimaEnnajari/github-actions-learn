@@ -7,6 +7,9 @@ on:
 jobs: 
     build: 
         runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: 04-using-actions/my-react-app  # in every command in run scope will be executed in specific working directory
 
         # Step 0 : checkout the code from the repository
         # Step1 : Install dependencies of our react project
@@ -27,5 +30,8 @@ jobs:
 
             - name: Install react dependecies
               run: npm ci
-              working-directory: 04-using-actions/my-react-app
+              #working-directory: 04-using-actions/my-react-app
+            
+            - name: Run Unit tests
+              run: npm run test
 
