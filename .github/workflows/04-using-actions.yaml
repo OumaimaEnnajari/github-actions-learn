@@ -1,0 +1,22 @@
+name: 04 - Using Actions
+
+on:
+    push:
+        branches: [main]
+
+jobs: 
+    build: 
+        runs-on: ubuntu-latest
+
+        # Step 0 : checkout the code from the repository
+        # Step1 : Install dependencies of our react project
+        # Step 2 : Execute automated tests 
+
+        steps: 
+             #Step 0 : Clone the github project into runner
+            - name: Checkout Code (Clone)
+              uses: actions/checkout@v4
+
+            - name: Printing Folders
+              run: ls 
+
