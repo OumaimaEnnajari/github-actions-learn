@@ -15,8 +15,8 @@ jobs:
         steps: 
              #Step 0 : Clone the github project into runner
             - name: Checkout Code (Clone)
-              uses: actions/checkout@v4
+              uses: actions/checkout@latest
 
             - name: Printing Folders
-              run: ls 
+              run: ls -a
 
