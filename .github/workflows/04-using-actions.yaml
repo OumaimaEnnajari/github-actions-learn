@@ -1,8 +1,9 @@
 name: 04 - Using Actions
 
 on:
-    push:
-        branches: [main]
+    workflow_dispatch:
+    # push:
+    #     branches: [main]
 
 jobs: 
     build: 
@@ -34,4 +35,3 @@ jobs:
             
             - name: Run Unit tests
               run: npm run test
-
