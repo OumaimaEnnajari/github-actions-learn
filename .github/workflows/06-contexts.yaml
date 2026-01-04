@@ -2,10 +2,11 @@ name: 06- Workflow contexts
 run-name: DEBUG | ${{inputs.debug}}
 
 on: 
-    push:
+    # push:
     workflow_dispatch:
         inputs: # variables passed to workflow when it triggered by workflow_dispatch
             debug:   # this variable will be appeared in UI as a checkbox
+                description: "Enable debug mode"
                 type: boolean
                 default: false
 env: 
