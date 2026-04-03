@@ -1,5 +1,5 @@
 name: 06- Workflow contexts
-run-name: DEBUG | ${{inputs.debug}}
+run-name: DEBUG | ${{inputs.debug && 'ON' || 'OFF' }}
 
 on: 
     # push:
