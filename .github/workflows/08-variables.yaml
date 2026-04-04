@@ -22,3 +22,4 @@ jobs :
                 echo "PROD-VAR = ${{vars.PROD_VAR || 'default value'}}"
                 echo "STAGING_VAR = ${{vars.STAGING_VAR || 'default value'}}"
                 echo "TARGET_VAR = ${{vars.TARGET_VAR || 'default value'}}"
+                echo "TARGET_VAR = ${{vars.MY_VAR || 'default value'}}"
