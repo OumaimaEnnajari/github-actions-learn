@@ -1,0 +1,22 @@
+name : 08-variables.yaml
+on :
+    push :
+    workflow_dispatch:
+jobs : 
+    echo1: 
+        runs-on : ubutnu-latest
+        steps :
+            - name : display all env variables
+              run : |
+                echo "PROD-VAR = ${{vars.PROD_VAR}}"
+                echo "STAGING_VAR = ${{vars.STAGING_VAR}}"
+                echo "TARGET_VAR = ${{vars.STAGING_VAR}}"
+    echo2 :
+        runs-on : ubuntu-latest
+        environment : prod  # must always defined at job level , not at step level 
+        steps :             
+            - name : display prod variables 
+              run : |
+                echo "PROD-VAR = ${{vars.PROD_VAR}}"
+                echo "STAGING_VAR = ${{vars.STAGING_VAR}}"
+                echo "TARGET_VAR = ${{vars.STAGING_VAR}}"
