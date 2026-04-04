@@ -2,21 +2,23 @@ name : 08-variables.yaml
 on :
     push :
     workflow_dispatch:
+env:
+  TARGET_VAR_WITH_DEFULAT_VALUE = ${{vars.TARGET_VAR || 'default value'}}"
 jobs : 
     echo1: 
         runs-on : ubutnu-latest
         steps :
             - name : display all env variables
               run : |
-                echo "PROD-VAR = ${{vars.PROD_VAR}}"
-                echo "STAGING_VAR = ${{vars.STAGING_VAR}}"
-                echo "TARGET_VAR = ${{vars.TARGET_VAR}}"
+                echo "PROD-VAR = ${{vars.PROD_VAR || 'default value'}}"
+                echo "STAGING_VAR = ${{vars.STAGING_VAR || 'default value'}}"
+                echo "TARGET_VAR = ${{env.TARGET_VAR_WITH_DEFULAT_VALUE}}"
     echo2 :
         runs-on : ubuntu-latest
         environment : prod  # must always defined at job level , not at step level 
         steps :             
             - name : display prod variables 
               run : |
-                echo "PROD-VAR = ${{vars.PROD_VAR}}"
-                echo "STAGING_VAR = ${{vars.STAGING_VAR}}"
-                echo "TARGET_VAR = ${{vars.TARGET_VAR}}"
+                echo "PROD-VAR = ${{vars.PROD_VAR || 'default value'}}"
+                echo "STAGING_VAR = ${{vars.STAGING_VAR || 'default value'}}"
+                echo "TARGET_VAR = ${{vars.TARGET_VAR || 'default value'}}"
