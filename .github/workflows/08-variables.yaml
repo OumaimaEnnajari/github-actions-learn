@@ -3,7 +3,7 @@ on :
     push :
     workflow_dispatch:
 env:
-  TARGET_VAR_WITH_DEFULAT_VALUE : ${{vars.TARGET_VAR || 'default value'}}"
+  TARGET_VAR_WITH_DEFULAT_VALUE : ${{vars.TARGET_VAR || 'default value'}}
 jobs : 
     echo1: 
         runs-on : ubuntu-latest
