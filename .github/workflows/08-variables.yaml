@@ -1,6 +1,6 @@
 name : 08-variables
 on :
-    push :
+    # push :
     workflow_dispatch:
 env:
   TARGET_VAR_WITH_DEFULAT_VALUE : ${{vars.TARGET_VAR || 'default value'}}
