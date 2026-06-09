@@ -1,4 +1,4 @@
-name: 11- working inputs
+name: 11- working pr inputs
 on :
     workflow_dispatch:
         inputs:
