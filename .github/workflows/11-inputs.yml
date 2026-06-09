@@ -1,6 +1,5 @@
-name: 12- pr branch
+name: 11- working inputs
 on :
-    push:
     workflow_dispatch:
         inputs:
             dry-run :
@@ -31,6 +30,7 @@ jobs :
                 echo "Building with targt : ${{ inputs.version }}"
     deploy :
         runs-on : ubuntu-latest
+        needs: build
         environment : ${{inputs.target}}
         if: ${{inputs.dry-run}}
         steps:
