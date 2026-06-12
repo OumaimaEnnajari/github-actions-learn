@@ -1,0 +1,38 @@
+name : 13- catching 
+on:
+    workflow_dispatch:
+        inputs:
+            use-cash:
+                description: whether to execute cash step
+                type: boolean
+                default: true
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: 13-caching/my-app 
+        steps :
+            - name : Checkout (cloner) le projet github  # After that step, automatically we are in the project (not need to : cd <name_project)
+              uses: action/checkou@v4
+            - name: Setup Node JS
+              uses: actions/setup-node@v3
+              with:
+                node-version: '20.x'
+            #- name : CD  ==> cette commande sera execute dans sa propre session de shell
+            #  run : cd 13-caching/my-app 
+            - name : Insatall dependencies
+              run : npm ci
+            - name : Testing
+              run : npm run test
+            - name : Building 
+              run : npm run build
+            - name : Deploying
+              run : echo "Deploying to nonprod env"
+
+# 1- Checkout github repo
+# 2- install dependecies
+# 3- testing
+# 4- Building
+# 5- Deploying in nonprod environment
+              
