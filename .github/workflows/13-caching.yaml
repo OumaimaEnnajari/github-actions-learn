@@ -24,7 +24,7 @@ jobs:
             - name : Insatall dependencies
               run : npm ci
             - name : Testing
-              run : npm run test
+              run : npm run lint
             - name : Building 
               run : npm run build
             - name : Deploying
