@@ -14,7 +14,7 @@ jobs:
                 working-directory: 13-caching/my-app 
         steps :
             - name : Checkout (cloner) le projet github  # After that step, automatically we are in the project (not need to : cd <name_project)
-              uses: action/checkou@v4
+              uses: action/checkout@v4
             - name: Setup Node JS
               uses: actions/setup-node@v3
               with:
