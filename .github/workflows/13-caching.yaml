@@ -46,11 +46,11 @@ jobs:
               run : npm ci
 
             - name : Testing
-              run : npm run lint
+              run : npm run test
 
             - name : Building 
               run : npm run build
-              
+
             - name : Deploying
               run : echo "Deploying to nonprod env"
 
