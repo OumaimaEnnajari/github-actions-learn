@@ -24,18 +24,33 @@ jobs:
         steps :
             - name : Checkout (cloner) le projet github  # After that step, automatically we are in the project (not need to : cd <name_project)
               uses: actions/checkout@v4
+
             - name: Setup Node JS
               uses: actions/setup-node@v3
               with:
                 node-version: ${{inputs.node-version}}
+
             #- name : CD  ==> cette commande sera execute dans sa propre session de shell
             #  run : cd 13-caching/my-app 
+            
+            - name : Download cached dependencies
+              uses : actions/cache@v3
+              if : ${{inputs.use-cash}}
+              id : cache
+              with : 
+                path : 13-caching/my-app/node_modules
+                key : deps-node-modules-${{ hashFiles('13-caching/my-app/package-lock.json')}}
+
             - name : Install dependencies
+              if : ${{steps.cache.outputs.cache-hit == 'false'}}
               run : npm ci
+
             - name : Testing
               run : npm run lint
+
             - name : Building 
               run : npm run build
+              
             - name : Deploying
               run : echo "Deploying to nonprod env"
 
