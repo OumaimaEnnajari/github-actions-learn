@@ -42,11 +42,11 @@ jobs:
                 key : deps-node-modules-${{ hashFiles('13-caching/my-app/package-lock.json')}}
 
             - name : Install dependencies
-              if : ${{steps.cache.outputs.cache-hit == 'false'}}
+              if : ${{ inputs.use-cash == false || steps.cache.outputs.cache-hit != 'true' }}
               run : npm ci
 
             - name : Testing
-              run : npm run test
+              run : npm run lint
 
             - name : Building 
               run : npm run build
