@@ -21,6 +21,8 @@ jobs:
         defaults:
             run:
                 working-directory: 13-caching/my-app 
+        outputs :
+          cache-key : ${{steps.cache-key.outputs.CACHE_KEY}}
         steps :
             - name : Checkout (cloner) le projet github  # After that step, automatically we are in the project (not need to : cd <name_project)
               uses: actions/checkout@v4
@@ -33,13 +35,17 @@ jobs:
             #- name : CD  ==> cette commande sera execute dans sa propre session de shell
             #  run : cd 13-caching/my-app 
             
+            - name : Calculate cache key
+              id: cache-key
+              run : echo "CACHE_KEY = deps-node-modules-${{ hashFiles('13-caching/my-app/package-lock.json')}} " >> "$GITHUB_OUTPUT"
+
             - name : Download cached dependencies
               uses : actions/cache@v3
               if : ${{inputs.use-cash}}
               id : cache
               with : 
                 path : 13-caching/my-app/node_modules
-                key : deps-node-modules-${{ hashFiles('13-caching/my-app/package-lock.json')}}
+                key : ${{steps.cache-key.outputs.CACHE_KEY}}
 
             - name : Install dependencies
               if : ${{ inputs.use-cash == false || steps.cache.outputs.cache-hit != 'true' }}

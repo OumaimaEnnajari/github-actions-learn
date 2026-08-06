@@ -1,0 +1,57 @@
+name : 14- working with Artifacts
+on : 
+    workflow_dispatch:
+        inputs :
+            node-version : 
+                description : Node version
+                type : choice
+                options : 
+                  - 18.x
+                  - 20.x
+                  - 22.x
+                default : 20.x
+
+jobs :
+    CI :
+        runs-on : ubutnu-latest
+        defaults:
+            run:
+                working-directory : 13-caching/my-app  #available only for run commands 
+        steps :
+            - name : Checkout the react code
+              uses : actions/checkout@v4
+
+            - name : Setup node Js environment
+              uses : actions/setup-node@v3
+              with : 
+                node-version: ${{inputs.node-version}}
+
+            - name : Caching the dependencies
+              id : cache
+              uses : actions/cache@v3
+              with :
+                path : 13-caching/my-app/node_modules
+                key :  deps-node-modules-${{ hashFiles('13-caching/my-app/package-lock.json')}} 
+            - name : Install dependencies
+              if :  ${{ steps.cache.outputs.cache-hit != 'true' }}
+              run : npm ci
+            - name : Testing
+              run : npm run lint
+            - name : Building 
+              run : npm run build
+            - name : Upload files 
+              uses : actions/upload-artifact@v3
+              with : 
+                name : app
+                path : 13-caching/my-app/dist
+
+    CD : 
+        runs-on : ubuntu-latest
+        steps:
+            - name : Downloadning build artifact
+              uses : actions/download-artifact@v3
+              with : 
+                name : app
+                path : dist
+            - name : Show folder structure
+              run : ls -R
