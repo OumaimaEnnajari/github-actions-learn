@@ -19,16 +19,16 @@ jobs :
                 working-directory : 13-caching/my-app  #available only for run commands 
         steps :
             - name : Checkout the react code
-              uses : actions/checkout@v4
+              uses : actions/checkout@v7
 
             - name : Setup node Js environment
-              uses : actions/setup-node@v4
+              uses : actions/setup-node@v6
               with : 
                 node-version: ${{inputs.node-version}}
 
             - name : Caching the dependencies
               id : cache
-              uses : actions/cache@v4
+              uses : actions/cache@v6
               with :
                 path : 13-caching/my-app/node_modules
                 key :  deps-node-modules-${{ hashFiles('13-caching/my-app/package-lock.json')}} 
@@ -40,7 +40,7 @@ jobs :
             - name : Building 
               run : npm run build
             - name : Upload files 
-              uses : actions/upload-artifact@v4
+              uses : actions/upload-artifact@v7
               with : 
                 name : app
                 path : 13-caching/my-app/dist
@@ -50,7 +50,7 @@ jobs :
         needs: CI
         steps:
             - name : Downloadning build artifact
-              uses : actions/download-artifact@v4
+              uses : actions/download-artifact@v8
               with : 
                 name : app
                 path : dist

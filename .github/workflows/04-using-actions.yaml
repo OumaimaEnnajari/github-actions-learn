@@ -19,13 +19,13 @@ jobs:
         steps: 
              #Step 0 : Clone the github project into runner
             - name: Checkout Code (Clone)
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
 
             - name: Printing Folders
               run: ls
             
             - name: Setup node
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v6
               with: 
                 node-version: '22.21.0'
 
