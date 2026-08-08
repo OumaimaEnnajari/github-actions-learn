@@ -17,7 +17,6 @@ jobs :
                     - os: ubuntu-latest
                       node-version: 18.x
                     - os : ubuntu-latest
-                      node-version : 22.x
                       tag: experimental
         steps: 
             - name : Setup node
