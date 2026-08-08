@@ -41,7 +41,8 @@ jobs :
                 include :
                     - color : red
                       shape: square
-                      opacity: 50 # this value will be added in each job, not only the one that concerned [red, square]
+                      # opacity: 50  # this value will be added to only the one that concerned [red, square]
+                    - opacity: 50 # this value will be added in each job, not only the one that concerned [red, square]
         steps : 
             - name : Dummy step
               run : echo " ${{matrix.color}} -  ${{matrix.shape}} -  ${{matrix.size}} -  ${{matrix.opacity}}"
